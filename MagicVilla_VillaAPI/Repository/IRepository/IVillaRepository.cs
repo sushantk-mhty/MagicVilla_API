@@ -6,11 +6,12 @@ namespace MagicVilla_VillaAPI.Repository.IRepository
 {
 	public interface IVillaRepository
 	{
-        Task<List<Villa>> GetAll(Expression<Func<Villa,bool>> filter = null);
-        Task<Villa> Get(Expression<Func<Villa,bool>> filter = null, bool tracked=true);
-        Task Create(Villa entity);
-		Task Remove(Villa entity);
-		Task Save();
+        Task<List<Villa>> GetAllAsysnc(Expression<Func<Villa,bool>> filter = null);
+        Task<Villa> GetAsysnc(Expression<Func<Villa,bool>> filter = null, bool tracked=true);
+        Task CreateAsysnc(Villa entity);
+        Task UpdteAsysnc(Villa entity);
+        Task RemoveAsysnc(Villa entity);
+		Task SaveAsysnc();
 	}
 }
 
