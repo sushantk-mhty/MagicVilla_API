@@ -169,7 +169,7 @@ namespace MagicVilla_VillaAPI.Controllers
                 }
                 Villa model = _mapper.Map<Villa>(updateDTO);
 
-                await _dbVilla.UpdteAsysnc(model);
+                await _dbVilla.UpdateAsysnc(model);
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
                 return Ok(_response);
@@ -182,7 +182,7 @@ namespace MagicVilla_VillaAPI.Controllers
             return _response;
         }
         [HttpPatch("{id:int}", Name = "UpdatePartialVilla")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdatePartialVilla(int id, JsonPatchDocument<VillaUpdateDTO> patchDTO)
         {
@@ -199,7 +199,7 @@ namespace MagicVilla_VillaAPI.Controllers
             }
             patchDTO.ApplyTo(villaDTO, ModelState);
             Villa model = _mapper.Map<Villa>(villaDTO);
-            await _dbVilla.UpdteAsysnc(model);
+            await _dbVilla.UpdateAsysnc(model);
 
             if (!ModelState.IsValid)
             {

@@ -6,7 +6,7 @@ namespace MagicVilla_VillaAPI.Repository.IRepository
 {
 	public interface IVillaRepository : IRepository<Villa>
 	{
-        Task<Villa> UpdteAsysnc(Villa entity);
+        Task<Villa> UpdateAsysnc(Villa entity);
 	}
 }
 
