@@ -25,6 +25,7 @@ namespace MagicVilla_VillaAPI.Controllers
         private readonly ILogger<VillaNumberAPIController> _logger;
         protected APIResponse _response;
         private readonly IVillaNumberRepository _dbVillaNumber;
+        private readonly IVillaRepository _dbVilla;
         private readonly IMapper _mapper;
 
         public VillaNumberAPIController(ILogger<VillaNumberAPIController> logger, IVillaNumberRepository dbVillaNumber, IMapper mapper)
@@ -100,6 +101,11 @@ namespace MagicVilla_VillaAPI.Controllers
                     ModelState.AddModelError("CustomError", "Villa Number already exit");
                     return BadRequest(ModelState);
                 }
+                if (await _dbVilla.GetAsysnc(u=>u.Id==createDTO.VillaId)==null)
+                {
+                    ModelState.AddModelError("CustomError", "Villa Id is Invalid");
+                    return BadRequest(ModelState);
+                }
                 if (createDTO == null)
                 {
                     return BadRequest(createDTO);
@@ -165,6 +171,11 @@ namespace MagicVilla_VillaAPI.Controllers
                 {
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     return BadRequest(_response);
+                }
+                if (await _dbVilla.GetAsysnc(u => u.Id == updateDTO.VillaId) == null)
+                {
+                    ModelState.AddModelError("CustomError", "Villa Id is Invalid");
+                    return BadRequest(ModelState);
                 }
                 VillaNumber model = _mapper.Map<VillaNumber>(updateDTO);
 
